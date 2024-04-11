@@ -3,34 +3,54 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-import { arabicToRoman, romanToArabic } from "./app";
+import { arabicToRoman, romanToArabic } from "./converter";
 
 function App() {
   let [arabicNumeral, setArabicNumeral] = useState(null);
-  let [romanNumeral, setRomanNumeral] = useState(null);
+  let [romanNumeral, setRomanNumeral] = useState("");
 
   function buttonClickHandler(direction) {
     if (direction === "UP") {
+      if (arabicNumeral === null) {
+        alert("Input field is empty.");
+        return;
+      } else if (parseInt(arabicNumeral) > 3999) {
+        alert("only works for numbers less than 4000");
+        return;
+      }
       let romanNumber = arabicToRoman(arabicNumeral);
       console.log(arabicNumeral, romanNumber);
       setRomanNumeral(romanNumber);
     } else if (direction === "DOWN") {
+      if (romanNumeral === "") {
+        alert("Input field is empty.");
+        return;
+      } else if (/[^IXVLDCM]+/.test(romanNumeral.toUpperCase())) {
+        alert("Contains Invalid Character");
+        return;
+      }
       let arabicNumber = romanToArabic(romanNumeral);
       console.log(romanNumeral, arabicNumber);
       setArabicNumeral(arabicNumber);
+      setRomanNumeral(romanNumeral.toUpperCase());
     }
   }
+
   function inputChangeHandler(e, numeralType) {
     if (numeralType === "ARABIC") {
-      setArabicNumeral(e.target.value);
+      if (e.target.value === "") {
+        setArabicNumeral(null);
+        return;
+      }
+      setArabicNumeral(parseInt(e.target.value));
     } else if (numeralType === "ROMAN") {
       setRomanNumeral(e.target.value);
     }
   }
 
   return (
-    <main className="min-h-screen grid place-content-center gap-4">
-      <h1 className="text-3xl font-bold text-center mb-16">
+    <main className="min-h-screen flex items-center justify-center flex-col gap-4">
+      <h1 className="text-3xl font-bold text-center mb-16 mt-48 md:text-4xl">
         <span className="flex gap-2 items-center justify-center">
           <span>Arabic</span>
           <svg
@@ -52,7 +72,7 @@ function App() {
         Numeral converter
       </h1>
       <div className="">
-        <Label htmlFor="roman-numeral-input" className="text-lg">
+        <Label htmlFor="roman-numeral-input" className="md:text-lg">
           Roman Numeral
         </Label>
         <Input
@@ -98,16 +118,27 @@ function App() {
         </Button>
       </div>
       <div className="">
-        <Label htmlFor="roman-numeral-input" className="text-lg">
+        <Label htmlFor="roman-numeral-input" className="md:text-lg">
           Arabic Numeral
         </Label>
         <Input
           type="number"
           id="arabic-numeral-input"
           placeholder="8"
-          value={arabicNumeral}
+          value={arabicNumeral ? arabicNumeral : ""}
           onChange={(e) => inputChangeHandler(e, "ARABIC")}
         />
+      </div>
+      <div className="mt-auto mb-4 mx-8">
+        <h3 className="text-red-400 underline">Disclaimer</h3>
+        <ol className="text-sm text-slate-700 list-decimal pl-4">
+          <li>This web app is for the European modified Roman numbers only.</li>
+          <li>This web app only works for numbers less than 4000.</li>
+          <li>
+            It doesn't necessarily check for valid Roman number, it only checks
+            for valid Roman characters.
+          </li>
+        </ol>
       </div>
     </main>
   );
