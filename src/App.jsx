@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 import { arabicToRoman, romanToArabic } from "./converter";
+import { ModeToggle } from "@/components/modeToggle";
 
 function App() {
   let [arabicNumeral, setArabicNumeral] = useState(null);
@@ -49,8 +50,11 @@ function App() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center flex-col gap-4">
-      <h1 className="text-3xl font-bold text-center mb-16 mt-48 md:text-4xl">
+    <main className="min-h-screen flex items-center justify-center flex-col gap-4 max-w-screen-sm mx-auto">
+      <div className="self-end mr-8 mt-8">
+        <ModeToggle />
+      </div>
+      <h1 className="text-3xl font-bold text-center mb-16 mt-48 md:text-4xl dark:text-slate-100">
         <span className="flex gap-2 items-center justify-center">
           <span>Arabic</span>
           <svg
@@ -72,7 +76,10 @@ function App() {
         Numeral converter
       </h1>
       <div className="">
-        <Label htmlFor="roman-numeral-input" className="md:text-lg">
+        <Label
+          htmlFor="roman-numeral-input"
+          className="md:text-lg dark:text-slate-100"
+        >
           Roman Numeral
         </Label>
         <Input
@@ -81,17 +88,21 @@ function App() {
           placeholder="VII"
           value={romanNumeral}
           onChange={(e) => inputChangeHandler(e, "ROMAN")}
+          className="dark:text-slate-50"
         />
       </div>
       <div className="flex gap-2 justify-center">
-        <Button onClick={() => buttonClickHandler("DOWN")}>
+        <Button
+          onClick={() => buttonClickHandler("DOWN")}
+          className="dark:bg-white"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
-            stroke="white"
-            className="w-6 h-6"
+            stroke=""
+            className="w-6 h-6 stroke-white dark:stroke-black"
           >
             <path
               strokeLinecap="round"
@@ -100,14 +111,17 @@ function App() {
             />
           </svg>
         </Button>
-        <Button onClick={() => buttonClickHandler("UP")}>
+        <Button
+          onClick={() => buttonClickHandler("UP")}
+          className="dark:bg-white"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
-            stroke="white"
-            className="w-6 h-6"
+            stroke=""
+            className="w-6 h-6 stroke-white dark:stroke-black"
           >
             <path
               strokeLinecap="round"
@@ -118,7 +132,10 @@ function App() {
         </Button>
       </div>
       <div className="">
-        <Label htmlFor="roman-numeral-input" className="md:text-lg">
+        <Label
+          htmlFor="roman-numeral-input"
+          className="md:text-lg dark:text-slate-100"
+        >
           Arabic Numeral
         </Label>
         <Input
@@ -127,11 +144,12 @@ function App() {
           placeholder="8"
           value={arabicNumeral ? arabicNumeral : ""}
           onChange={(e) => inputChangeHandler(e, "ARABIC")}
+          className="dark:text-slate-50"
         />
       </div>
       <div className="mt-auto mb-4 mx-8">
         <h3 className="text-red-400 underline">Disclaimer</h3>
-        <ol className="text-sm text-slate-700 list-decimal pl-4">
+        <ol className="text-sm text-slate-700 list-decimal pl-4 dark:text-slate-300">
           <li>This web app is for the European modified Roman numbers only.</li>
           <li>This web app only works for numbers less than 4000.</li>
           <li>
