@@ -1,4 +1,4 @@
-# Number Format Converter (Roman <=> Arabic)
+# Number Format Converter (Roman ↔ Arabic)
 
 ![Web App Screenshot](./screenshot.png)
 
