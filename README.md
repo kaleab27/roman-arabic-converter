@@ -1,8 +1,25 @@
-# React + Vite
+# Number Format Converter (Roman <=> Arabic)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Web App Screenshot](./screenshot.png)
 
-Currently, two official plugins are available:
+### Features to be Added
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    ✔︎ Copy to clipboard Button
+
+    ✔︎ Convert numbers with keyboard event
+
+    ✔︎ Clear all inputs button
+
+    ✔︎ Add support for numbers greater than 3999
+
+### Built with
+
+- Reactjs
+- Tailwindcss
+- Shadcn/ui
+
+### Disclaimer
+
+1. This web app is for the European modified Roman numbers only.
+2. This web app only works for numbers less than 4000.
+3. It doesn't necessarily check for valid Roman number, it only checks for valid Roman characters.
